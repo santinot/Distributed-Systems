@@ -3,8 +3,15 @@ import random
 import os
 import json
 import time
+import argparse
 
-USERS = 200000
+def arguments():
+    parser = argparse.ArgumentParser(description='Commands')
+    parser.add_argument('-u',
+                        type=int,
+                        dest='users',
+                        required=True)
+    return parser.parse_args()
 
 # Function to generate and return fake data
 def generation():
@@ -18,9 +25,10 @@ def generation():
         exit()
 
     list_of_dictionary = []
+    args = arguments()
 
     # Generating fake data and appending films to each user
-    for _ in range(USERS):
+    for _ in range(args.users):
         first_name = fake.first_name()
         last_name = fake.last_name()
         list_of_films = []

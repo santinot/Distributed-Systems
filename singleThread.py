@@ -26,9 +26,7 @@ def MapReduce(data):
     reduced_data = reducing(mapped_data, title)
     return reduced_data
 
-#input("Please insert a title...")  Examples: 300, Vikings, Parasite, Narcos
-
-title = '300'
+title = '300' #input("Please insert a title...")  Examples: 300, Vikings, Parasite, Narcos
  
 # Opening JSON file with films to check if the title is valid and JSON file with data    
 try:

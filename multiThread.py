@@ -24,12 +24,14 @@ def reducing(data, title):
             dictionary[list(data[i].keys())[0]] = 1
     return dictionary.get(title)
 
-def MapReduce(data):
+def MapReduce(data, i):
     mapped_data = mapping(data)
     reduced_data = reducing(mapped_data, title)
-    result.append(reduced_data)
+    result[i] = reduced_data
 
-result = []
+# List for result of each process
+result = [0] * os.cpu_count()
+
 title = '300' #input("Please insert a title...\n")
 
 # Opening JSON file with films to check if the title is valid and JSON file with data 
@@ -57,8 +59,9 @@ data = [data[x:x+len(data)//num_thread] for x in range(0, len(data), len(data)//
 # List for threads
 thread = []
 
+# Creating threads
 for i in range(0, num_thread):
-    thread.append(threading.Thread(target=MapReduce, args=(data[i],)))
+    thread.append(threading.Thread(target=MapReduce, args=(data[i], i)))
 start_time = time.time()
 for i in range(0, len(thread)):
     thread[i].start()

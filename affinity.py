@@ -59,11 +59,11 @@ data = [data[x:x+len(data)//num_thread] for x in range(0, len(data), len(data)//
 # List for result of each process
 result = Manager().list(range(len(data)))
 
+# Creating processes
 p = [] 
-start_time = time.time()
 for i in range(0, num_thread):
     p.append(Process(target=MapReduce, args=(data[i], i, result)))
-    
+start_time = time.time()
 for i in range(0, num_thread):
     p[i].start()
 for i in range(0, num_thread):    

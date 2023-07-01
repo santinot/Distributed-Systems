@@ -3,7 +3,7 @@ import time
 import argparse
 import ray
 
-
+# Arguments for the number of cluster's nodes
 def arguments():
     parser = argparse.ArgumentParser(description='Commands')
     parser.add_argument('-n',
