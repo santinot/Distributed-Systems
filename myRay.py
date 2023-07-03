@@ -43,7 +43,7 @@ ray.init()
 
 args = arguments()    
 
-title = input("Please insert a title...\n")
+title = '300' #input("Please insert a title...\n")
 
 # Opening JSON file with films to check if the title is valid and JSON file with data 
 try:
@@ -68,9 +68,12 @@ cluster = args.num_cluster
 # Dividing the data in chunks for each thread
 data = [data[x:x+len(data)//cluster] for x in range(0, len(data), len(data)//cluster)]
 
+# Launch parallel MapReduce tasks
 start_time = time.time()
 futures = [MapReduce.remote(ray.put(data[i]), ray.put(title)) for i in range(0, cluster)]
 end_time = time.time()
+
+# Get the results of the tasks
 result = [(ray.get(futures[i])) for i in range(0, cluster)]
 
 print("Il numero di occorrenze per il film " + title + " è: " + str(sum(result)))
