@@ -71,7 +71,6 @@ for i in range(0, num_thread):
 end_time = time.time()
 
 print("Il numero di occorrenze per il film " + title + " è: " + str(sum(result)))
-print (str(result))
 print("Valutato in " + str(end_time - start_time) + " seconds.")
 
 
